@@ -31,7 +31,8 @@ public class ExperimentModel {
 	private Speed speed;
 	
 	@Column
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="s")
+//	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="s")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Timestamp experimentTime;
 	
 	
