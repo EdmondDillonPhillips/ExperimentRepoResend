@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import ch.qos.logback.core.util.Duration;
 
 @Entity
 @Table(name="ExperimentModel")
@@ -15,23 +18,43 @@ public class ExperimentModel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	
 	@Column
 	private String subjectName;
 	
-	@Column
-	private int speed;
+	@Transient
+	private Speed speed;
 	
-	@Column
+	@Transient
 	private Timestamp experimentTime;
 	
+	
+	class Speed {
+		 private Duration duration;
+		 private Distance distance;
+		}
+		class Distance {
+		 private DistanceUnit distanceUnit;
+		 private Double unit;
+		}
+		enum DistanceUnit {
+		 Millimeters,
+		 Centimeters,
+		 Meters,
+		 Kilometers,
+		 Inches,
+		 Feet,
+		 Yards,
+		 Miles;
+		}
+	
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -43,11 +66,11 @@ public class ExperimentModel {
 		this.subjectName = subjectName;
 	}
 
-	public int getSpeed() {
+	public Speed getSpeed() {
 		return speed;
 	}
 
-	public void setSpeed(int speed) {
+	public void setSpeed(Speed speed) {
 		this.speed = speed;
 	}
 
